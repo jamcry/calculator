@@ -10,9 +10,18 @@ let inputArr = [];
 //3 add rounding for long floats
 //4 add a new line to form to show the op history
 numBtns.forEach(btn => btn.addEventListener("click", () => {
-    updateDisplay(btn.innerHTML);
-    console.warn("a (num-btn) is clicked.")
-    console.log(`Displaying its value (${btn.innerHTML})`);
+    if(display.value !== "" && Number.isNaN( parseFloat(display.value) )){
+        clearDisplay()
+        updateDisplay("ERROR: AC FIRST");
+    }
+    else if(btn.innerHTML === "?") {
+        alert("Calculator - Programmed by JamCry (jamcry@hotmail.com)");
+    }
+    else {
+        updateDisplay(btn.innerHTML);
+        console.warn("a (num-btn) is clicked.")
+        console.log(`Displaying its value (${btn.innerHTML})`);
+    }
 }));
 
 decBtn.addEventListener("click", () => {
@@ -33,7 +42,7 @@ opBtns.forEach(btn => btn.addEventListener("click", () => {
         clear();
     }
     else {
-            if(display.value === "") {
+            if(display.value === "" || Number.isNaN(parseFloat(display.value))) {
                 alert("ENTER A NUMBER FIRST!");
             }
             else {
@@ -52,9 +61,14 @@ opBtns.forEach(btn => btn.addEventListener("click", () => {
 }));
 
 eqBtn.addEventListener("click", () => {
-    inputArr.push(parseFloat(display.value));
-    clearDisplay();
-    operate();
+    if(display.value === "" || Number.isNaN(parseFloat(display.value))) {
+        display.value = "ERROR";
+    }
+    else {
+        inputArr.push(parseFloat(display.value));
+        clearDisplay();
+        operate();
+    }
 });
 
 function operate() {
@@ -125,8 +139,8 @@ function operate() {
             continue;
         }
     }
-    lg(hist);
-    updateDisplay(inputArr[0]);
+    lg("Operation: " + hist);
+    updateDisplay(Number(inputArr[0].toFixed(5)));
     inputArr = [];
 }
 function clearAll(){

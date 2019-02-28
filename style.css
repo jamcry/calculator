@@ -1,54 +1,78 @@
 body {
-            padding-top: 10px;
-        }
-        .container {
-            overflow: hidden;
-            text-align: center;
-            margin: 10px auto;
-            padding: auto;
-            width: 400px;
-            height: 452px;
-            border-radius: 10px;
-            background: #B2DFDB;
-        }
-        .buttons {
-            margin: auto;
-            width: 360px;
-            height: 550px;
-            
-        }
-        .buttons button {
-            font-family: Arial, Helvetica, sans-serif;
-            font-weight: bold;
-            font-size: 24px;
-            margin: 5px;
-            width: 70px;
-            height: 70px;
-            float: left;
-            border: 1px solid #1A237E;
-            border-radius: 50%;
-            color: white;
-            background: #26A69A;
-        }
-        .buttons .op-btn {
-            background: gray;
-            color: white;
-            width: 50px;
-            border-radius: 8px;
-        }
-        .buttons .eq-btn {
-            background: #01579B;
-            border-radius: 8px;
-            width: 110px;
-        }
+    padding-top: 10px;
+}
+* {
+    outline: 0;
+}
+.container {
+    overflow: hidden;
+    text-align: center;
+    margin: 10px auto;
+    padding: auto;
+    width: 400px;
+    height: 452px;
+    border-radius: 10px;
+    background: #B2DFDB;
+}
+.buttons {
+    margin: auto;
+    width: 360px;
+    height: 550px;
+    
+}
+.buttons button {
+    outline: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    margin: 5px;
+    width: 70px;
+    height: 70px;
+    float: left;
+    border: 1px solid black;
+    border-radius: 50%;
+    color: white;
+    background: #26A69A;
+    box-shadow: 3px 3px 0 black;
+}
 
-        .display {
-            background: #B0BEC5;
-            text-align: right;
-            font-size: 36px;
-            margin: 30px auto;
-            width: 360px;
-            height: 60px;
-            padding-right: 20px;
-            border-radius: 50px;
-        }
+.buttons button:active {
+    box-shadow: inset 0 0 5px black;
+    transform: translate3d(3px,3px,0);
+}
+
+.buttons .op-btn {
+    background: gray;
+    color: white;
+    width: 50px;
+    border-radius: 8px;
+}
+.buttons .eq-btn {
+    background: #01579B;
+    border-radius: 8px;
+    width: 110px;
+}
+
+.display {
+    background: #B0BEC5;
+    border: 1px solid #1A237E;
+    text-align: right;
+    font-size: 36px;
+    margin: 30px auto;
+    width: 360px;
+    height: 60px;
+    padding-right: 20px;
+    border-radius: 50px;
+    box-shadow: inset 2px 2px 1px black;
+}
+
+/*Disables text highlighting*/
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome and Opera */
+  }

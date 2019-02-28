@@ -6,6 +6,10 @@ const eqBtn = document.querySelector(".eq-btn");
 
 let inputArr = [];
 
+//1 check if operator is clicked before number
+//2 update CL button to also remove operator
+//3 add rounding for long floats
+//4 add a new line to form to show the op history
 numBtns.forEach(btn => btn.addEventListener("click", () => {
     updateDisplay(btn.innerHTML);
     console.warn("a (num-btn) is clicked.")
@@ -20,6 +24,7 @@ decBtn.addEventListener("click", () => {
         alert("Too many decimals!");
     }
 });
+
 opBtns.forEach(btn => btn.addEventListener("click", () => {
     if(btn.innerHTML === "AC") {
         clearAll();
@@ -29,12 +34,21 @@ opBtns.forEach(btn => btn.addEventListener("click", () => {
         clear();
     }
     else {
-            inputArr.push(parseFloat(display.value));
+            if(display.value === "") {
+                alert("ENTER A NUMBER FIRST!");
+            }
+            else {
+                inputArr.push(parseFloat(display.value));
             inputArr.push(btn.innerHTML);
+            
+            
             lg(`display val: ${display.value}`);
             lg(`input array: ${JSON.stringify(inputArr)}`);
             clearDisplay();
 
+                //add: PRINT THE OPERATION WITH OPERATOR
+            }
+            
     }
 }));
 
@@ -43,7 +57,18 @@ eqBtn.addEventListener("click", () => {
     clearDisplay();
     operate();
 });
+
 function operate() {
+    // OnePlus easter egg
+    //? Can conflict with double operator check
+    if(inputArr[0] === 1 && inputArr[1] === "+") {
+        lg("one plus")
+        updateDisplay("[1+]NEVER SETTLE!");
+        display.style.background = "red";
+        display.style.color = "white";
+        inputArr = [""];
+    }
+    let hist = inputArr.join("");
     lg(JSON.stringify(inputArr));
     for(let i = 0; i < inputArr.length; i++) {
         lg(` iteration ${i}`);
@@ -54,7 +79,7 @@ function operate() {
             let num2 = inputArr[i+1];
             let result = num1 * num2;
             lg(result);
-            inputArr.splice(i-1,3,result);
+            inputArr.splice((i-1), 3, result);
             lg(inputArr);
             i = 0;
         }
@@ -64,7 +89,7 @@ function operate() {
             let num2 = inputArr[i+1];
             let result = num1 / num2;
             lg(result)
-            inputArr.splice(i-1,3,result);
+            inputArr.splice((i-1), 3, result);
             lg(inputArr)
             i=0;
         }
@@ -82,7 +107,7 @@ function operate() {
             let num2 = inputArr[i+1];
             let result = num1 + num2;
             lg(result);
-            inputArr.splice(i-1,3,result);
+            inputArr.splice((i-1), 3, result);
             lg(inputArr);
             i = 0;
         }
@@ -92,7 +117,7 @@ function operate() {
             let num2 = inputArr[i+1];
             let result = num1 - num2;
             lg(result)
-            inputArr.splice(i-1,3,result);
+            inputArr.splice((i-1), 3, result);
             lg(inputArr)
             i=0;
         }
@@ -101,11 +126,9 @@ function operate() {
             continue;
         }
     }
-
+    lg(hist);
     updateDisplay(inputArr[0]);
     inputArr = [];
-    // Use two for loops to operate
-    // First for * and /, second for + and -.
 }
 function clearAll(){
     display.value = "";

@@ -45,6 +45,65 @@ eqBtn.addEventListener("click", () => {
 });
 function operate() {
     lg(JSON.stringify(inputArr));
+    for(let i = 0; i < inputArr.length; i++) {
+        lg(` iteration ${i}`);
+        let el = inputArr[i];
+        if(el === "*") {
+            lg("operating *");
+            let num1 = inputArr[i-1];
+            let num2 = inputArr[i+1];
+            let result = num1 * num2;
+            lg(result);
+            inputArr.splice(i-1,3,result);
+            lg(inputArr);
+            i = 0;
+        }
+        else if(el === "/") {
+            lg("operating /");
+            let num1 = inputArr[i-1];
+            let num2 = inputArr[i+1];
+            let result = num1 / num2;
+            lg(result)
+            inputArr.splice(i-1,3,result);
+            lg(inputArr)
+            i=0;
+        }
+        else {
+            lg("no operator")
+            continue;
+        }
+    }
+    for(let i = 0; i < inputArr.length; i++) {
+        lg(` iteration ${i}`);
+        let el = inputArr[i];
+        if(el === "+") {
+            lg("operating *");
+            let num1 = inputArr[i-1];
+            let num2 = inputArr[i+1];
+            let result = num1 + num2;
+            lg(result);
+            inputArr.splice(i-1,3,result);
+            lg(inputArr);
+            i = 0;
+        }
+        else if(el === "-") {
+            lg("operating /");
+            let num1 = inputArr[i-1];
+            let num2 = inputArr[i+1];
+            let result = num1 - num2;
+            lg(result)
+            inputArr.splice(i-1,3,result);
+            lg(inputArr)
+            i=0;
+        }
+        else {
+            lg("no operator")
+            continue;
+        }
+    }
+
+    updateDisplay(inputArr[0]);
+    inputArr = [];
     // Use two for loops to operate
     // First for * and /, second for + and -.
 }

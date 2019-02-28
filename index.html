@@ -5,56 +5,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Calculator</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            padding-top: 10px;
-        }
-        .container {
-            text-align: center;
-            padding: auto;
-        }
-        .buttons {
-            margin: auto;
-            width: 300px;
-            height: 550px;
-            background: gray;
-        }
-        .buttons button {
-            margin: 5px;
-            width: 90px;
-            height: 100px;
-            float: left;
-        }
-        .screenIn {
-            text-align: right;
-            width: 300px;
-            height: 60px;
-            border-radius: 10px;
-        }
-    </style>
+    <link href="./style.css" type="text/css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <div class="screen">
-            <input class="screenIn" type="text" value="TEST MODE">
+            <input class="display" type="text" value="">
         </div>
         <div class="buttons">
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>4</button>
-            <button>5</button>
-            <button>6</button>
-            <button>7</button>
-            <button>8</button>
-            <button>9</button>
-            <button>0</button>
-            <button>+</button>
-            <button>-</button>
-            <button>*</button>
-            <button>/</button>
-            <button>AC</button>
+            <button class="num-btn">7</button>
+            <button class="num-btn">8</button>
+            <button class="num-btn">9</button>
+            
+            <button class="op-btn">AC</button>
+            <button class="op-btn">CL</button>
+
+            <button class="num-btn">4</button>
+            <button class="num-btn">5</button>
+            <button class="num-btn">6</button>
+
+            <button class="op-btn">+</button>
+            <button class="op-btn">-</button>
+            
+            <button class="num-btn">1</button>
+            <button class="num-btn">2</button>
+            <button class="num-btn">3</button>
+            
+            <button class="op-btn">*</button>
+            <button class="op-btn">/</button>
+            
+            <button class="dec-btn">.</button>
+            <button class="num-btn">0</button>
+            <button class="num-btn">?</button>
+            <button class="eq-btn">=</button>
+            
         </div>
     </div>
+    <script src="./app.js"></script>
 </body>
 </html>

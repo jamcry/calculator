@@ -6,7 +6,6 @@ const eqBtn = document.querySelector(".eq-btn");
 
 let inputArr = [];
 
-//1 check if operator is clicked before number
 //2 update CL button to also remove operator
 //3 add rounding for long floats
 //4 add a new line to form to show the op history

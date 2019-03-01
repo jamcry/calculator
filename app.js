@@ -7,17 +7,26 @@ const eqBtn = document.querySelector(".eq-btn");
 let inputArr = [];
 
 //2 update CL button to also remove operator
-//3 add rounding for long floats
-//4 add a new line to form to show the op history
+//** add a new line to form to show the op history
+//FINAL: remove debugging lines
+
 numBtns.forEach(btn => btn.addEventListener("click", () => {
+    // If the display value is not a number and a number is press show an error
     if(display.value !== "" && Number.isNaN( parseFloat(display.value) )){
         clearDisplay()
-        updateDisplay("ERROR: AC FIRST");
+        //updateDisplay("ERROR: AC FIRST");
     }
     else if(btn.innerHTML === "?") {
         alert("Calculator - Programmed by JamCry (jamcry@hotmail.com)");
     }
     else {
+        // Check if last char is operator
+        let lastC = display.value[display.value.length-1]
+        let ops = ["*","/","-","+"];
+        if(ops.includes(lastC)) {
+            clearDisplay();
+        }
+        // Add the pressed number to the display
         updateDisplay(btn.innerHTML);
         console.warn("a (num-btn) is clicked.")
         console.log(`Displaying its value (${btn.innerHTML})`);
@@ -25,6 +34,7 @@ numBtns.forEach(btn => btn.addEventListener("click", () => {
 }));
 
 decBtn.addEventListener("click", () => {
+    //Check if (.) is already used in the current number
     if(!display.value.includes(".")) {
         updateDisplay(".");
     }
@@ -46,14 +56,14 @@ opBtns.forEach(btn => btn.addEventListener("click", () => {
                 alert("ENTER A NUMBER FIRST!");
             }
             else {
-                inputArr.push(parseFloat(display.value));
+            inputArr.push(parseFloat(display.value));
             inputArr.push(btn.innerHTML);
             
             
             lg(`display val: ${display.value}`);
             lg(`input array: ${JSON.stringify(inputArr)}`);
             clearDisplay();
-
+            updateDisplay(inputArr.join(""));
                 //add: PRINT THE OPERATION WITH OPERATOR
             }
             
@@ -61,7 +71,16 @@ opBtns.forEach(btn => btn.addEventListener("click", () => {
 }));
 
 eqBtn.addEventListener("click", () => {
-    if(display.value === "" || Number.isNaN(parseFloat(display.value))) {
+    //X\\ NOT WORKING
+    if(inputArr[0] === 1 && inputArr[1] === "+") {
+        lg("one plus");
+        updateDisplay("[1+]NEVER SETTLE!");
+        display.style.background = "red";
+        display.style.color = "white";
+        inputArr = [""];
+    }
+    else if(display.value === "" || Number.isNaN(parseFloat(display.value))) {
+        lg("array: " + inputArr);
         display.value = "ERROR";
     }
     else {
@@ -73,14 +92,8 @@ eqBtn.addEventListener("click", () => {
 
 function operate() {
     // OnePlus easter egg
-    //? Can conflict with double operator check
-    if(inputArr[0] === 1 && inputArr[1] === "+") {
-        lg("one plus")
-        updateDisplay("[1+]NEVER SETTLE!");
-        display.style.background = "red";
-        display.style.color = "white";
-        inputArr = [""];
-    }
+    //!! Currently overwritten by operator check
+    
     let hist = inputArr.join("");
     lg(JSON.stringify(inputArr));
     for(let i = 0; i < inputArr.length; i++) {

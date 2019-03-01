@@ -3,16 +3,17 @@ const numBtns = document.querySelectorAll(".num-btn");
 const decBtn = document.querySelector(".dec-btn");
 const opBtns = document.querySelectorAll(".op-btn");
 const eqBtn = document.querySelector(".eq-btn");
+const row1 = document.querySelector(".row-1");
+const row2 = document.querySelector(".row-2");
 
 let inputArr = [];
 
 //2 update CL button to also remove operator
-//** add a new line to form to show the op history
 //FINAL: remove debugging lines
 
 numBtns.forEach(btn => btn.addEventListener("click", () => {
     // If the display value is not a number and a number is press show an error
-    if(display.value !== "" && Number.isNaN( parseFloat(display.value) )){
+    if(row2.textContent !== "" && Number.isNaN( parseFloat(row2.textContent) )){
         clearDisplay()
         //updateDisplay("ERROR: AC FIRST");
     }
@@ -21,7 +22,8 @@ numBtns.forEach(btn => btn.addEventListener("click", () => {
     }
     else {
         // Check if last char is operator
-        let lastC = display.value[display.value.length-1]
+        // CAN BE UNNECCESARY
+        let lastC = row2.textContent[row2.textContent.length-1]
         let ops = ["*","/","-","+"];
         if(ops.includes(lastC)) {
             clearDisplay();
@@ -35,7 +37,7 @@ numBtns.forEach(btn => btn.addEventListener("click", () => {
 
 decBtn.addEventListener("click", () => {
     //Check if (.) is already used in the current number
-    if(!display.value.includes(".")) {
+    if(!row2.textContent.includes(".")) {
         updateDisplay(".");
     }
     else {
@@ -52,18 +54,18 @@ opBtns.forEach(btn => btn.addEventListener("click", () => {
         clear();
     }
     else {
-            if(display.value === "" || Number.isNaN(parseFloat(display.value))) {
+            if(row2.textContent === "" || Number.isNaN(parseFloat(row2.textContent))) {
                 alert("ENTER A NUMBER FIRST!");
             }
             else {
-            inputArr.push(parseFloat(display.value));
+            inputArr.push(parseFloat(row2.textContent));
             inputArr.push(btn.innerHTML);
             
             
-            lg(`display val: ${display.value}`);
+            lg(`display val: ${row2.textContent}`);
             lg(`input array: ${JSON.stringify(inputArr)}`);
             clearDisplay();
-            updateDisplay(inputArr.join(""));
+            row1.textContent = (inputArr.join(""));
                 //add: PRINT THE OPERATION WITH OPERATOR
             }
             
@@ -79,22 +81,20 @@ eqBtn.addEventListener("click", () => {
         display.style.color = "white";
         inputArr = [""];
     }
-    else if(display.value === "" || Number.isNaN(parseFloat(display.value))) {
+    else if(row2.textContent === "" || Number.isNaN(parseFloat(row2.textContent))) {
         lg("array: " + inputArr);
-        display.value = "ERROR";
+        row2.textContent = "ERROR";
     }
     else {
-        inputArr.push(parseFloat(display.value));
+        inputArr.push(parseFloat(row2.textContent));
         clearDisplay();
         operate();
     }
 });
 
 function operate() {
-    // OnePlus easter egg
-    //!! Currently overwritten by operator check
-    
-    let hist = inputArr.join("");
+    // OnePlus easter egg 
+    let history = inputArr.join("");
     lg(JSON.stringify(inputArr));
     for(let i = 0; i < inputArr.length; i++) {
         lg(` iteration ${i}`);
@@ -152,22 +152,24 @@ function operate() {
             continue;
         }
     }
-    lg("Operation: " + hist);
+    lg("Operation: " + history);
+    row1.textContent = history + "=";
     updateDisplay(Number(inputArr[0].toFixed(5)));
     inputArr = [];
 }
 function clearAll(){
-    display.value = "";
+    row1.textContent = "";
+    row2.textContent = "";
     inputArr = [];
 }
 function clear() {
-    display.value = display.value.slice(0, -1);
+    row2.textContent = row2.textContent.slice(0, -1);
 }
 function clearDisplay(){
-    display.value = "";
+    row2.textContent = "";
 }
 function updateDisplay(value) {
-    display.value += value;
+    row2.textContent += value;
 }
 
 function add(a,b) {

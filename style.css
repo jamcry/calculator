@@ -27,6 +27,7 @@ body {
     border-radius: 10px;
 }
 .display {
+    position: relative;
     font-family: "ZCOOL QingKe HuangYou", cursive;
     background: #a7b9a3;
     border: 1px solid #1A237E;
@@ -38,6 +39,19 @@ body {
     height: 60px;
     border-radius: 10px;
     box-shadow: inset 2px 2px 1px black;
+}
+.row-1 {
+    font-size: 20px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.row-2 {
+    font-size: 38px;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
 }
 .buttons {
     margin: auto;

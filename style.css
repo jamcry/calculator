@@ -39,6 +39,7 @@ body {
     height: 60px;
     border-radius: 10px;
     box-shadow: inset 2px 2px 1px black;
+    overflow: hidden;
 }
 .row-1 {
     font-size: 20px;

@@ -48,20 +48,19 @@ opBtns.forEach(btn => btn.addEventListener("click", () => {
         clear();
     }
     else {
-            if(row2.textContent === "" || Number.isNaN(parseFloat(row2.textContent))) {
-                alert("ENTER A NUMBER FIRST!");
-            }
-            else {
+        if(row2.textContent === "" || Number.isNaN(parseFloat(row2.textContent))) {
+            alert("ENTER A NUMBER FIRST!");
+        }
+        else {
             inputArr.push(parseFloat(row2.textContent));
             inputArr.push(btn.innerHTML);
-            
-            
+                
+                
             lg(`display val: ${row2.textContent}`);
             lg(`input array: ${JSON.stringify(inputArr)}`);
             clearDisplay();
             row1.textContent = (inputArr.join(""));
-                //add: PRINT THE OPERATION WITH OPERATOR
-            }
+        }
             
     }
 }));
@@ -166,16 +165,8 @@ function updateDisplay(value) {
     row2.textContent += value;
 }
 
-function add(a,b) {
-    return a+b;
-}
-function substract(a,b) {
-    return a-b;
-}
-function multiply(a,b) {
-    return a*b;
-}
-function divide(a,b) {
-    return a/b;
-}
+let add = (a, b) => a + b;
+let substract = (a, b) => a - b;
+let multiply = (a, b) => a * b;
+let divide = (a, b) => a / b;
 const lg = (msg) => console.log(msg);

@@ -68,27 +68,20 @@ eqBtn.addEventListener("click", () => {
 function operate() {
     // OnePlus easter egg 
     let history = inputArray.join("");
-    lg(JSON.stringify(inputArray));
 
     for(let i = 0; i < inputArray.length; i++) {
         let input = inputArray[i];
         if(input === "*") {
-            lg("operating *");
             let num1 = inputArray[i-1];
             let num2 = inputArray[i+1];
             let result = num1 * num2;
-            lg(result);
             inputArray.splice((i-1), 3, result);
-            lg(inputArray);
             i = 0;
         } else if(input === "/") {
-            lg("operating /");
             let num1 = inputArray[i-1];
             let num2 = inputArray[i+1];
             let result = num1 / num2;
-            lg(result)
             inputArray.splice((i-1), 3, result);
-            lg(inputArray)
             i=0;
         } else {
             // Not an operator
@@ -99,7 +92,6 @@ function operate() {
     for(let i = 0; i < inputArray.length; i++) {
         let input = inputArray[i];
         if(input === "+") {
-            lg("operating *");
             let num1 = inputArray[i-1];
             let num2 = inputArray[i+1];
             let result = num1 + num2;
@@ -136,4 +128,3 @@ let add = (a, b) => a + b;
 let substract = (a, b) => a - b;
 let multiply = (a, b) => a * b;
 let divide = (a, b) => a / b;
-const lg = (msg) => console.log(msg);

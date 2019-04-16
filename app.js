@@ -54,14 +54,14 @@ opBtns.forEach(btn => btn.addEventListener("click", () => {
         else {
             inputArr.push(parseFloat(row2.textContent));
             inputArr.push(btn.innerHTML);
-                
-                
+            
+            
             lg(`display val: ${row2.textContent}`);
             lg(`input array: ${JSON.stringify(inputArr)}`);
             clearDisplay();
             row1.textContent = (inputArr.join(""));
         }
-            
+        
     }
 }));
 
@@ -89,9 +89,11 @@ function operate() {
     // OnePlus easter egg 
     let history = inputArr.join("");
     lg(JSON.stringify(inputArr));
+
     for(let i = 0; i < inputArr.length; i++) {
         lg(` iteration ${i}`);
         let el = inputArr[i];
+    
         if(el === "*") {
             lg("operating *");
             let num1 = inputArr[i-1];
@@ -102,6 +104,7 @@ function operate() {
             lg(inputArr);
             i = 0;
         }
+    
         else if(el === "/") {
             lg("operating /");
             let num1 = inputArr[i-1];
@@ -112,11 +115,13 @@ function operate() {
             lg(inputArr)
             i=0;
         }
+    
         else {
             lg("no operator")
             continue;
         }
     }
+    
     for(let i = 0; i < inputArr.length; i++) {
         lg(` iteration ${i}`);
         let el = inputArr[i];
@@ -138,7 +143,7 @@ function operate() {
             lg(result)
             inputArr.splice((i-1), 3, result);
             lg(inputArr)
-            i=0;
+            i = 0;
         }
         else {
             lg("no operator")
@@ -155,15 +160,10 @@ function clearAll(){
     row2.textContent = "";
     inputArr = [];
 }
-function clear() {
-    row2.textContent = row2.textContent.slice(0, -1);
-}
-function clearDisplay(){
-    row2.textContent = "";
-}
-function updateDisplay(value) {
-    row2.textContent += value;
-}
+
+let clear = () => row2.textContent = row2.textContent.slice(0, -1);
+let clearDisplay = () => row2.textContent = "";
+let updateDisplay = (value) => row2.textContent += value;
 
 let add = (a, b) => a + b;
 let substract = (a, b) => a - b;

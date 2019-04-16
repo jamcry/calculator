@@ -10,18 +10,14 @@ let inputArr = [];
 
 numBtns.forEach(btn => btn.addEventListener("click", () => {
     // If the display value is not a number and a number is press show an error
-    if(row2.textContent !== "" && Number.isNaN( parseFloat(row2.textContent) )){
+    if (row2.textContent !== "" && Number.isNaN(parseFloat(row2.textContent))){
         clearDisplay()
-    }
-    else if(btn.innerHTML === "?") {
+    } else if (btn.innerHTML === "?") {
         alert("Calculator - Programmed by JamCry (jamcry@hotmail.com)");
-    }
-    else {
-        let lastC = row2.textContent[row2.textContent.length-1]
-        let ops = ["*","/","-","+"];
-        if(ops.includes(lastC)) {
-            clearDisplay();
-        }
+    } else {
+        let lastC = row2.textContent[row2.textContent.length - 1]
+        let ops = ["*", "/", "-", "+"];
+        if (ops.includes(lastC)) clearDisplay();
         // Add the pressed number to the display
         updateDisplay(btn.innerHTML);
         console.warn("a (num-btn) is clicked.")
@@ -31,54 +27,46 @@ numBtns.forEach(btn => btn.addEventListener("click", () => {
 
 decBtn.addEventListener("click", () => {
     //Check if (.) is already used in the current number
-    if(!row2.textContent.includes(".")) {
+    if (!row2.textContent.includes(".")) {
         updateDisplay(".");
-    }
-    else {
+    } else {
         alert("Too many decimals!");
     }
 });
 
 opBtns.forEach(btn => btn.addEventListener("click", () => {
-    if(btn.innerHTML === "AC") {
+    if (btn.innerHTML === "AC") {
         clearAll();
-    }
-    else if(btn.innerHTML === "CL") {
+    } else if (btn.innerHTML === "CL") {
         console.log("CL is clicked");
         clear();
-    }
-    else {
-        if(row2.textContent === "" || Number.isNaN(parseFloat(row2.textContent))) {
+    } else {
+        if (row2.textContent === "" || Number.isNaN(parseFloat(row2.textContent))) {
             alert("ENTER A NUMBER FIRST!");
-        }
-        else {
+        } else {
             inputArr.push(parseFloat(row2.textContent));
-            inputArr.push(btn.innerHTML);
-            
+            inputArr.push(btn.innerHTML);   
             
             lg(`display val: ${row2.textContent}`);
             lg(`input array: ${JSON.stringify(inputArr)}`);
             clearDisplay();
             row1.textContent = (inputArr.join(""));
         }
-        
     }
 }));
 
 eqBtn.addEventListener("click", () => {
     // OnePlus easter egg
-    if(inputArr[0] === 1 && inputArr[1] === "+") {
+    if (inputArr[0] === 1 && inputArr[1] === "+") {
         lg("one plus");
         updateDisplay("[1+]NEVER SETTLE!");
         display.style.background = "red";
         display.style.color = "white";
         inputArr = [""];
-    }
-    else if(row2.textContent === "" || Number.isNaN(parseFloat(row2.textContent))) {
+    } else if (row2.textContent === "" || Number.isNaN(parseFloat(row2.textContent))) {
         lg("array: " + inputArr);
         row2.textContent = "ERROR";
-    }
-    else {
+    } else {
         inputArr.push(parseFloat(row2.textContent));
         clearDisplay();
         operate();
@@ -103,9 +91,7 @@ function operate() {
             inputArr.splice((i-1), 3, result);
             lg(inputArr);
             i = 0;
-        }
-    
-        else if(el === "/") {
+        } else if(el === "/") {
             lg("operating /");
             let num1 = inputArr[i-1];
             let num2 = inputArr[i+1];
@@ -114,9 +100,7 @@ function operate() {
             inputArr.splice((i-1), 3, result);
             lg(inputArr)
             i=0;
-        }
-    
-        else {
+        } else {
             lg("no operator")
             continue;
         }
@@ -134,8 +118,7 @@ function operate() {
             inputArr.splice((i-1), 3, result);
             lg(inputArr);
             i = 0;
-        }
-        else if(el === "-") {
+        } else if(el === "-") {
             lg("operating /");
             let num1 = inputArr[i-1];
             let num2 = inputArr[i+1];
@@ -144,8 +127,7 @@ function operate() {
             inputArr.splice((i-1), 3, result);
             lg(inputArr)
             i = 0;
-        }
-        else {
+        } else {
             lg("no operator")
             continue;
         }
@@ -155,6 +137,7 @@ function operate() {
     updateDisplay(Number(inputArr[0].toFixed(5)));
     inputArr = [];
 }
+
 function clearAll(){
     row1.textContent = "";
     row2.textContent = "";

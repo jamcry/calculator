@@ -6,7 +6,7 @@ const eqBtn = document.querySelector(".eq-btn");
 const row1 = document.querySelector(".row-1");
 const row2 = document.querySelector(".row-2");
 
-let inputArr = [];
+let inputArray = [];
 
 numBtns.forEach(btn => btn.addEventListener("click", () => {
     // If the display value is not a number and a number is press show an error
@@ -15,13 +15,11 @@ numBtns.forEach(btn => btn.addEventListener("click", () => {
     } else if (btn.innerHTML === "?") {
         alert("Calculator - Programmed by JamCry (jamcry@hotmail.com)");
     } else {
-        let lastC = row2.textContent[row2.textContent.length - 1]
-        let ops = ["*", "/", "-", "+"];
-        if (ops.includes(lastC)) clearDisplay();
+        let lastChar = row2.textContent[row2.textContent.length - 1]
+        let operators = ["*", "/", "-", "+"];
+        if (operators.includes(lastChar)) clearDisplay();
         // Add the pressed number to the display
         updateDisplay(btn.innerHTML);
-        console.warn("a (num-btn) is clicked.")
-        console.log(`Displaying its value (${btn.innerHTML})`);
     }
 }));
 
@@ -38,36 +36,30 @@ opBtns.forEach(btn => btn.addEventListener("click", () => {
     if (btn.innerHTML === "AC") {
         clearAll();
     } else if (btn.innerHTML === "CL") {
-        console.log("CL is clicked");
         clear();
     } else {
         if (row2.textContent === "" || Number.isNaN(parseFloat(row2.textContent))) {
             alert("ENTER A NUMBER FIRST!");
         } else {
-            inputArr.push(parseFloat(row2.textContent));
-            inputArr.push(btn.innerHTML);   
-            
-            lg(`display val: ${row2.textContent}`);
-            lg(`input array: ${JSON.stringify(inputArr)}`);
+            inputArray.push(parseFloat(row2.textContent));
+            inputArray.push(btn.innerHTML);   
             clearDisplay();
-            row1.textContent = (inputArr.join(""));
+            row1.textContent = (inputArray.join(""));
         }
     }
 }));
 
 eqBtn.addEventListener("click", () => {
     // OnePlus easter egg
-    if (inputArr[0] === 1 && inputArr[1] === "+") {
-        lg("one plus");
+    if (inputArray[0] === 1 && inputArray[1] === "+") {
         updateDisplay("[1+]NEVER SETTLE!");
         display.style.background = "red";
         display.style.color = "white";
-        inputArr = [""];
+        inputArray = [""];
     } else if (row2.textContent === "" || Number.isNaN(parseFloat(row2.textContent))) {
-        lg("array: " + inputArr);
         row2.textContent = "ERROR";
     } else {
-        inputArr.push(parseFloat(row2.textContent));
+        inputArray.push(parseFloat(row2.textContent));
         clearDisplay();
         operate();
     }
@@ -75,73 +67,65 @@ eqBtn.addEventListener("click", () => {
 
 function operate() {
     // OnePlus easter egg 
-    let history = inputArr.join("");
-    lg(JSON.stringify(inputArr));
+    let history = inputArray.join("");
+    lg(JSON.stringify(inputArray));
 
-    for(let i = 0; i < inputArr.length; i++) {
-        lg(` iteration ${i}`);
-        let el = inputArr[i];
-    
-        if(el === "*") {
+    for(let i = 0; i < inputArray.length; i++) {
+        let input = inputArray[i];
+        if(input === "*") {
             lg("operating *");
-            let num1 = inputArr[i-1];
-            let num2 = inputArr[i+1];
+            let num1 = inputArray[i-1];
+            let num2 = inputArray[i+1];
             let result = num1 * num2;
             lg(result);
-            inputArr.splice((i-1), 3, result);
-            lg(inputArr);
+            inputArray.splice((i-1), 3, result);
+            lg(inputArray);
             i = 0;
-        } else if(el === "/") {
+        } else if(input === "/") {
             lg("operating /");
-            let num1 = inputArr[i-1];
-            let num2 = inputArr[i+1];
+            let num1 = inputArray[i-1];
+            let num2 = inputArray[i+1];
             let result = num1 / num2;
             lg(result)
-            inputArr.splice((i-1), 3, result);
-            lg(inputArr)
+            inputArray.splice((i-1), 3, result);
+            lg(inputArray)
             i=0;
         } else {
-            lg("no operator")
+            // Not an operator
             continue;
         }
     }
     
-    for(let i = 0; i < inputArr.length; i++) {
-        lg(` iteration ${i}`);
-        let el = inputArr[i];
-        if(el === "+") {
+    for(let i = 0; i < inputArray.length; i++) {
+        let input = inputArray[i];
+        if(input === "+") {
             lg("operating *");
-            let num1 = inputArr[i-1];
-            let num2 = inputArr[i+1];
+            let num1 = inputArray[i-1];
+            let num2 = inputArray[i+1];
             let result = num1 + num2;
-            lg(result);
-            inputArr.splice((i-1), 3, result);
-            lg(inputArr);
+            inputArray.splice((i-1), 3, result);
             i = 0;
-        } else if(el === "-") {
-            lg("operating /");
-            let num1 = inputArr[i-1];
-            let num2 = inputArr[i+1];
+        } else if(input === "-") {
+            let num1 = inputArray[i-1];
+            let num2 = inputArray[i+1];
             let result = num1 - num2;
-            lg(result)
-            inputArr.splice((i-1), 3, result);
-            lg(inputArr)
+            inputArray.splice((i-1), 3, result);
             i = 0;
         } else {
-            lg("no operator")
+            // Not an operator
             continue;
         }
     }
-    lg("Operation: " + history);
+    
     row1.textContent = history + "=";
-    updateDisplay(Number(inputArr[0].toFixed(5)));
-    inputArr = [];
+    updateDisplay(Number(inputArray[0].toFixed(5)));
+    inputArray = [];
 }
 
 function clearAll(){
     row1.textContent = "";
     row2.textContent = "";
-    inputArr = [];
+    inputArray = [];
 }
 
 let clear = () => row2.textContent = row2.textContent.slice(0, -1);

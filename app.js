@@ -8,21 +8,15 @@ const row2 = document.querySelector(".row-2");
 
 let inputArr = [];
 
-//2 update CL button to also remove operator
-//FINAL: remove debugging lines
-
 numBtns.forEach(btn => btn.addEventListener("click", () => {
     // If the display value is not a number and a number is press show an error
     if(row2.textContent !== "" && Number.isNaN( parseFloat(row2.textContent) )){
         clearDisplay()
-        //updateDisplay("ERROR: AC FIRST");
     }
     else if(btn.innerHTML === "?") {
         alert("Calculator - Programmed by JamCry (jamcry@hotmail.com)");
     }
     else {
-        // Check if last char is operator
-        // CAN BE UNNECCESARY
         let lastC = row2.textContent[row2.textContent.length-1]
         let ops = ["*","/","-","+"];
         if(ops.includes(lastC)) {
@@ -73,7 +67,7 @@ opBtns.forEach(btn => btn.addEventListener("click", () => {
 }));
 
 eqBtn.addEventListener("click", () => {
-    //X\\ NOT WORKING
+    // OnePlus easter egg
     if(inputArr[0] === 1 && inputArr[1] === "+") {
         lg("one plus");
         updateDisplay("[1+]NEVER SETTLE!");

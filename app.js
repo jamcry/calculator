@@ -66,7 +66,6 @@ eqBtn.addEventListener("click", () => {
 });
 
 function operate() {
-    // OnePlus easter egg 
     let history = inputArray.join("");
 
     for(let i = 0; i < inputArray.length; i++) {

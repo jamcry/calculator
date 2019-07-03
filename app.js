@@ -65,23 +65,28 @@ eqBtn.addEventListener("click", () => {
     }
 });
 
+function getResult(index, arr, operator) {
+    let inputArray = [...arr];
+    const num1 = arr[index-1];
+    const num2 = arr[index+1];
+    const result = operator(num1, num2);
+    inputArray.splice((index-1), 3, result);
+    return [result, inputArray]
+}
+
 function operate() {
     let history = inputArray.join("");
 
     for(let i = 0; i < inputArray.length; i++) {
         let input = inputArray[i];
         if(input === "*") {
-            let num1 = inputArray[i-1];
-            let num2 = inputArray[i+1];
-            let result = num1 * num2;
-            inputArray.splice((i-1), 3, result);
+            let [result, resultArray] = getResult(i, inputArray, multiply);
+            inputArray = resultArray;
             i = 0;
         } else if(input === "/") {
-            let num1 = inputArray[i-1];
-            let num2 = inputArray[i+1];
-            let result = num1 / num2;
-            inputArray.splice((i-1), 3, result);
-            i=0;
+            let [result, resultArray] = getResult(i, inputArray, divide);
+            inputArray = resultArray;
+            i = 0;
         } else {
             // Not an operator
             continue;
@@ -91,16 +96,12 @@ function operate() {
     for(let i = 0; i < inputArray.length; i++) {
         let input = inputArray[i];
         if(input === "+") {
-            let num1 = inputArray[i-1];
-            let num2 = inputArray[i+1];
-            let result = num1 + num2;
-            inputArray.splice((i-1), 3, result);
+            let [result, resultArray] = getResult(i, inputArray, sum);
+            inputArray = resultArray;
             i = 0;
         } else if(input === "-") {
-            let num1 = inputArray[i-1];
-            let num2 = inputArray[i+1];
-            let result = num1 - num2;
-            inputArray.splice((i-1), 3, result);
+            let [result, resultArray] = getResult(i, inputArray, substract);
+            inputArray = resultArray;
             i = 0;
         } else {
             // Not an operator
@@ -123,7 +124,7 @@ let clear = () => row2.textContent = row2.textContent.slice(0, -1);
 let clearDisplay = () => row2.textContent = "";
 let updateDisplay = (value) => row2.textContent += value;
 
-let add = (a, b) => a + b;
-let substract = (a, b) => a - b;
+let sum = (a, b) => a + b;
+let subtract = (a, b) => a - b;
 let multiply = (a, b) => a * b;
 let divide = (a, b) => a / b;
